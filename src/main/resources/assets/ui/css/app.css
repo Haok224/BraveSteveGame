@@ -1,0 +1,5 @@
+.menu-btn{
+    -fx-background-color: lightgrey;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 30px;
+}

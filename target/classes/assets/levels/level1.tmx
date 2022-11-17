@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="28" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="3" nextobjectid="143">
+ <tileset firstgid="1" name="Map" tilewidth="24" tileheight="24" tilecount="6" columns="6">
+  <image source="map.png" width="144" height="24"/>
+ </tileset>
+ <tileset firstgid="7" name="Bed" tilewidth="48" tileheight="48" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="48" height="48" source="bed.png"/>
+  </tile>
+ </tileset>
+ <layer id="1" name="图块层 1" width="28" height="28">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="对象层 1">
+  <object id="2" type="border" x="0" y="0" width="672" height="24"/>
+  <object id="4" type="border" x="648" y="24" width="24" height="648"/>
+  <object id="5" type="border" x="0" y="648" width="648" height="24"/>
+  <object id="6" type="border" x="0" y="24" width="24" height="624"/>
+  <object id="25" type="glass" gid="2" x="288" y="600" width="24" height="24"/>
+  <object id="26" type="glass" gid="2" x="288" y="624" width="24" height="24"/>
+  <object id="27" type="glass" gid="2" x="288" y="648" width="24" height="24"/>
+  <object id="28" type="glass" gid="2" x="312" y="600" width="24" height="24"/>
+  <object id="29" type="glass" gid="2" x="336" y="600" width="24" height="24"/>
+  <object id="30" type="glass" gid="2" x="360" y="600" width="24" height="24"/>
+  <object id="31" type="glass" gid="2" x="360" y="624" width="24" height="24"/>
+  <object id="32" type="glass" gid="2" x="360" y="648" width="24" height="24"/>
+  <object id="33" type="bed" gid="7" x="312" y="648" width="48" height="48"/>
+  <object id="80" type="glass" gid="2" x="24" y="264" width="24" height="24"/>
+  <object id="81" type="glass" gid="2" x="48" y="264" width="24" height="24"/>
+  <object id="83" type="glass" gid="2" x="624" y="264" width="24" height="24"/>
+  <object id="84" type="glass" gid="2" x="600" y="264" width="24" height="24"/>
+  <object id="85" type="glass" gid="2" x="528" y="336" width="24" height="24"/>
+  <object id="86" type="glass" gid="2" x="360" y="336" width="24" height="24"/>
+  <object id="87" type="glass" gid="2" x="168" y="384" width="24" height="24"/>
+  <object id="88" type="glass" gid="2" x="192" y="456" width="24" height="24"/>
+  <object id="89" type="glass" gid="2" x="288" y="456" width="24" height="24"/>
+  <object id="90" type="glass" gid="2" x="456" y="480" width="24" height="24"/>
+  <object id="91" type="stone" gid="4" x="216" y="216" width="24" height="24"/>
+  <object id="92" type="stone" gid="4" x="312" y="168" width="24" height="24"/>
+  <object id="93" type="stone" gid="4" x="432" y="96" width="24" height="24"/>
+  <object id="94" type="stone" gid="4" x="216" y="96" width="24" height="24"/>
+  <object id="95" type="stone" gid="4" x="72" y="144" width="24" height="24"/>
+  <object id="96" type="stone" gid="4" x="384" y="240" width="24" height="24"/>
+  <object id="97" type="stone" gid="4" x="576" y="144" width="24" height="24"/>
+  <object id="98" type="grass" gid="3" x="48" y="432" width="24" height="24"/>
+  <object id="99" type="grass" gid="3" x="48" y="456" width="24" height="24"/>
+  <object id="100" type="grass" gid="3" x="48" y="480" width="24" height="24"/>
+  <object id="101" type="grass" gid="3" x="72" y="480" width="24" height="24"/>
+  <object id="102" type="grass" gid="3" x="96" y="480" width="24" height="24"/>
+  <object id="103" type="grass" gid="3" x="96" y="456" width="24" height="24"/>
+  <object id="104" type="grass" gid="3" x="96" y="432" width="24" height="24"/>
+  <object id="105" type="grass" gid="3" x="72" y="432" width="24" height="24"/>
+  <object id="106" type="grass" gid="3" x="72" y="456" width="24" height="24"/>
+  <object id="107" type="grass" gid="3" x="48" y="504" width="24" height="24"/>
+  <object id="108" type="grass" gid="3" x="72" y="504" width="24" height="24"/>
+  <object id="109" type="grass" gid="3" x="96" y="504" width="24" height="24"/>
+  <object id="110" type="grass" gid="3" x="120" y="504" width="24" height="24"/>
+  <object id="111" type="grass" gid="3" x="120" y="480" width="24" height="24"/>
+  <object id="112" type="grass" gid="3" x="120" y="456" width="24" height="24"/>
+  <object id="113" type="grass" gid="3" x="120" y="432" width="24" height="24"/>
+  <object id="114" type="grass" gid="3" x="552" y="408" width="24" height="24"/>
+  <object id="115" type="grass" gid="3" x="552" y="432" width="24" height="24"/>
+  <object id="116" type="grass" gid="3" x="552" y="456" width="24" height="24"/>
+  <object id="117" type="grass" gid="3" x="552" y="480" width="24" height="24"/>
+  <object id="118" type="grass" gid="3" x="576" y="480" width="24" height="24"/>
+  <object id="119" type="grass" gid="3" x="600" y="480" width="24" height="24"/>
+  <object id="120" type="grass" gid="3" x="600" y="456" width="24" height="24"/>
+  <object id="121" type="grass" gid="3" x="600" y="408" width="24" height="24"/>
+  <object id="122" type="grass" gid="3" x="576" y="408" width="24" height="24"/>
+  <object id="123" type="grass" gid="3" x="576" y="432" width="24" height="24"/>
+  <object id="124" type="grass" gid="3" x="576" y="456" width="24" height="24"/>
+  <object id="125" type="grass" gid="3" x="600" y="432" width="24" height="24"/>
+  <object id="126" type="grass" gid="3" x="528" y="408" width="24" height="24"/>
+  <object id="127" type="grass" gid="3" x="528" y="432" width="24" height="24"/>
+  <object id="128" type="grass" gid="3" x="528" y="456" width="24" height="24"/>
+  <object id="129" type="grass" gid="3" x="528" y="480" width="24" height="24"/>
+  
+  <object id="134" type="snow" gid="6" x="168" y="576" width="24" height="24"/>
+  <object id="135" type="snow" gid="6" x="168" y="600" width="24" height="24"/>
+  <object id="136" type="snow" gid="6" x="216" y="600" width="24" height="24"/>
+  <object id="137" type="snow" gid="6" x="240" y="576" width="24" height="24"/>
+  <object id="138" type="snow" gid="6" x="240" y="552" width="24" height="24"/>
+  <object id="139" type="snow" gid="6" x="408" y="552" width="24" height="24"/>
+  <object id="140" type="snow" gid="6" x="480" y="600" width="24" height="24"/>
+  <object id="141" type="snow" gid="6" x="528" y="648" width="24" height="24"/>
+  <object id="142" type="snow" gid="6" x="600" y="600" width="24" height="24"/>
+ </objectgroup>
+</map>
