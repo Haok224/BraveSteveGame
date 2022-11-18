@@ -37,5 +37,4 @@ public interface Config {
     Duration PLAYER_FREEZY_TIME = Duration.seconds(5);
     Duration ELYTRA_TIME = Duration.seconds(10);
     Point2D PLAYER_POINT = new Point2D(408.00,624.00);
-    long SAVE_TIME = 20*1000;
 }
