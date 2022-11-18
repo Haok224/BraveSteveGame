@@ -153,7 +153,7 @@ public class PlayerComponent extends Component {
 
     public void tp() {
         if (entity.getComponent(EffectComponent.class).hasEffect(EnderPearlEffect.class)) {
-            FXGL.play("biu.wav");
+            FXGL.play("tp.wav");
             Point2D point = FXGLMath.randomPoint(new Rectangle2D(Config.CELL_SIZE, Config.CELL_SIZE
                     , 26 * Config.CELL_SIZE - 24,
                     26 * Config.CELL_SIZE - 24));
