@@ -34,15 +34,7 @@ public class ArrowGlassCollisionHandler extends CollisionHandler {
                         isRemoveArrow = true;
                     }
                 }
-                case STONE -> {
-                    int level = arrow.getInt("level");
-                    if (level == Config.PLAYER_MAX_LEVEL) {
-                        FXGL.play("firework.wav");
-                        entity.removeFromWorld();
-                    }
-                    isRemoveArrow = true;
-                }
-                case BRICK -> {
+                case STONE, BRICK -> {
                     int level = arrow.getInt("level");
                     if (level == Config.PLAYER_MAX_LEVEL) {
                         FXGL.play("firework.wav");
