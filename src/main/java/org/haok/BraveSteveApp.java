@@ -4,7 +4,6 @@ import com.almasb.fxgl.app.CursorInfo;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.*;
-import com.almasb.fxgl.audio.Music;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
@@ -19,11 +18,11 @@ import javafx.util.Duration;
 import org.haok.collision.*;
 import org.haok.component.PlayerComponent;
 import org.haok.ui.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.List;
 import java.util.Map;
-
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static org.haok.Config.*;
@@ -126,9 +125,7 @@ public class BraveSteveApp extends GameApplication {
             freezeEnemyTimerAction.expire();
         }
         set("freezeEnemy", true);
-        freezeEnemyTimerAction = runOnce(() -> {
-            set("freezeEnemy", false);
-        }, Config.FREEZE_TIME);
+        freezeEnemyTimerAction = runOnce(() -> set("freezeEnemy", false), Config.FREEZE_TIME);
 
     }
 
@@ -186,21 +183,25 @@ public class BraveSteveApp extends GameApplication {
         gameSettings.setAppIcon("icon.png");
         gameSettings.getCSSList().add("app.css");
         gameSettings.setSceneFactory(new SceneFactory() {
+            @NotNull
             @Override
             public StartupScene newStartup(int width, int height) {
                 return new StartScene(width, height);
             }
 
+            @NotNull
             @Override
             public LoadingScene newLoadingScene() {
                 return new AppLoadingScean();
             }
 
+            @NotNull
             @Override
             public FXGLMenu newGameMenu() {
                 return new AppGameMenu();
             }
 
+            @NotNull
             @Override
             public FXGLMenu newMainMenu() {
                 return new AppMainMenu();
@@ -209,16 +210,13 @@ public class BraveSteveApp extends GameApplication {
         });
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         launch(args);
-
     }
 
     public void reinforce() {
         expireTimerAction(freezeEnemyTimerAction);
-        reinforceTimerAction = runOnce(() -> {
-            updateBed("glass");
-        }, Config.REINFORCE_TIME);
+        reinforceTimerAction = runOnce(() -> updateBed("glass"), Config.REINFORCE_TIME);
         updateBed("stone");
         List<Entity> entityList = getGameWorld().getEntitiesByType(GameType.BED);
         for (Entity entity : entityList) {
@@ -269,15 +267,21 @@ public class BraveSteveApp extends GameApplication {
                     spawnEnemyTimeAction.expire();
                 return;
             }
-            Point2D point = FXGLMath.random(Config.SPAWN_ENEMY_POSITION).get();
-            List<Entity> es = getGameWorld().getEntitiesInRange(new Rectangle2D(point.getX(), point.getY(), 39, 39));
-            List<Entity> entities = es.stream().filter(entity ->
-                    entity.isType(GameType.ENEMY)
-                            || entity.isType(GameType.PLAYER)
-                            || entity.isType(GameType.BRICK)
-                            || entity.isType(GameType.STONE)
-            ).toList();
-            if (entities.isEmpty()) {
+            Point2D point = FXGLMath.random(Config.SPAWN_ENEMY_POSITION).isPresent() ? FXGLMath.random(Config.SPAWN_ENEMY_POSITION).get() : null;
+            List<Entity> es = null;
+            if (point != null) {
+                es = getGameWorld().getEntitiesInRange(new Rectangle2D(point.getX(), point.getY(), 39, 39));
+            }
+            List<Entity> entities = null;
+            if (es != null) {
+                entities = es.stream().filter(entity ->
+                        entity.isType(GameType.ENEMY)
+                                || entity.isType(GameType.PLAYER)
+                                || entity.isType(GameType.BRICK)
+                                || entity.isType(GameType.STONE)
+                ).toList();
+            }
+            if (entities != null && entities.isEmpty()) {
                 spawn("enemy", point);
                 inc("enemyAmount", 1);
             }

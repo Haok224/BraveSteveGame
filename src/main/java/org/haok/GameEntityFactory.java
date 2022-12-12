@@ -21,6 +21,7 @@ import org.haok.component.PlayerComponent;
 import org.haok.component.PlayerLevelComponent;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class GameEntityFactory implements EntityFactory {
     @Spawns("player")
@@ -146,15 +147,18 @@ public class GameEntityFactory implements EntityFactory {
                 .collidable()
                 .build();
         switch (level) {
-            case 0:
+            case 0 -> {
                 FXGL.play("biu.wav");
                 return arrow;
-            case 1:
+            }
+            case 1 -> {
                 FXGL.play("biu.wav");
                 return betterArrow;
-            case 2:
+            }
+            case 2 -> {
                 FXGL.play("launch.wav");
                 return bestArrow;
+            }
         }
         return arrow;
     }
@@ -193,8 +197,8 @@ public class GameEntityFactory implements EntityFactory {
 
     @Spawns("item")
     public Entity newItem(SpawnData data) {
-        ItemType itemType = FXGLMath.random(ItemType.values()).get();
-        data.put("itemType", itemType);
+        ItemType itemType = FXGLMath.random(ItemType.values()).isPresent() ? FXGLMath.random(ItemType.values()).get() : null;
+        data.put("itemType", Objects.requireNonNull(itemType));
         return FXGL.entityBuilder(data)
                 .viewWithBBox("items/" + itemType.toString().toLowerCase(Locale.ROOT) + ".png")
                 .type(GameType.ITEM)

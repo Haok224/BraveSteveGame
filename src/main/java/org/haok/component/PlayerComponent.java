@@ -26,8 +26,9 @@ public class PlayerComponent extends Component {
     private double distance;
     private Dir moveDir = Dir.UP;
     private LocalTimer shootTimer;
+    @SuppressWarnings("all")
     private EffectComponent effectComponent;
-    private LazyValue<EntityGroup> blockAllLazyValue = new LazyValue<>(() ->
+    private final LazyValue<EntityGroup> blockAllLazyValue = new LazyValue<>(() ->
             FXGL.getGameWorld().getGroup(
                     GameType.BORDER,
                     GameType.STONE,
@@ -37,7 +38,7 @@ public class PlayerComponent extends Component {
                     GameType.PLAYER,
                     GameType.BRICK
             ));
-    private LazyValue<EntityGroup> blockLazyValue = new LazyValue<>(() ->
+    private final LazyValue<EntityGroup> blockLazyValue = new LazyValue<>(() ->
             FXGL.getGameWorld().getGroup(
                     GameType.BORDER,
                     GameType.STONE,
@@ -46,7 +47,7 @@ public class PlayerComponent extends Component {
                     GameType.PLAYER,
                     GameType.BRICK
             ));
-    private LazyValue<EntityGroup> borderValue = new LazyValue<>(() ->
+    private final LazyValue<EntityGroup> borderValue = new LazyValue<>(() ->
             FXGL.getGameWorld().getGroup(
                     GameType.BORDER
             )
@@ -124,7 +125,7 @@ public class PlayerComponent extends Component {
         int len = (int) distance;
         boolean b = effectComponent.hasEffect(ShipEffect.class);
         boolean b1 = effectComponent.hasEffect(ElytraEffect.class);
-        List<Entity> entityList = blockAllLazyValue.get().getEntitiesCopy();
+        List<Entity> entityList;
 
         if (b) {
             entityList = blockLazyValue.get().getEntitiesCopy();
@@ -136,7 +137,6 @@ public class PlayerComponent extends Component {
         for (int i = 0; i < len; i++) {
             entity.translate(moveDir.getVector().getX(), moveDir.getVector().getY());
             entityList.remove(entity);
-            int size = entityList.size();
             boolean isCollation = false;
             for (Entity value : entityList) {
                 if (entity.isColliding(value)) {

@@ -13,10 +13,6 @@ public class PlayerLevelComponent extends RechargeableIntComponent {
         restore(1);
     }
 
-    public void downgrade() {
-        damage(1);
-    }
-
     public void gradeFull() {
         restoreFully();
     }

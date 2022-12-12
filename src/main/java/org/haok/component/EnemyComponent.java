@@ -7,7 +7,10 @@ import com.almasb.fxgl.entity.component.Component;
 import org.haok.Dir;
 import org.haok.effects.EnderPearlEffect;
 
+import java.util.Objects;
+
 public class EnemyComponent extends Component {
+    @SuppressWarnings("all")
     private PlayerComponent playerComponent;
 
     @Override
@@ -17,9 +20,9 @@ public class EnemyComponent extends Component {
         }
         Dir moveDir = playerComponent.getMoveDir();
         if (FXGLMath.randomBoolean(0.025)) {
-            moveDir = FXGLMath.random(Dir.values()).get();
+            moveDir = FXGLMath.random(Dir.values()).isPresent() ? FXGLMath.random(Dir.values()).get() : null;
         }
-        switch (moveDir) {
+        switch (Objects.requireNonNull(moveDir)) {
             case UP -> playerComponent.moveUp();
             case DOWN -> playerComponent.moveDown();
             case LEFT -> playerComponent.moveLeft();
