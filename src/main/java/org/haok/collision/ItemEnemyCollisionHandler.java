@@ -14,8 +14,8 @@ import org.haok.effects.*;
 
 import java.util.List;
 
-public class ItemEnemyCollision extends CollisionHandler {
-    public ItemEnemyCollision() {
+public class ItemEnemyCollisionHandler extends CollisionHandler {
+    public ItemEnemyCollisionHandler() {
         super(GameType.ITEM, GameType.ENEMY);
     }
 

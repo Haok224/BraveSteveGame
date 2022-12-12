@@ -8,8 +8,8 @@ import org.haok.GameType;
 
 import java.util.List;
 
-public class ArrowGlassCollision extends CollisionHandler {
-    public ArrowGlassCollision() {
+public class ArrowGlassCollisionHandler extends CollisionHandler {
+    public ArrowGlassCollisionHandler() {
         super(GameType.ARROW, GameType.GLASS);
     }
 
@@ -23,8 +23,7 @@ public class ArrowGlassCollision extends CollisionHandler {
                         || entity.isType(GameType.GRASS))
         );
         boolean isRemoveArrow = false;
-        for (int i = 0; i < entityList.size(); i++) {
-            Entity entity = entityList.get(i);
+        for (Entity entity : entityList) {
             GameType type = (GameType) entity.getType();
             switch (type) {
                 case GLASS -> {

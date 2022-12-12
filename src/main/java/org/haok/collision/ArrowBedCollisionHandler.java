@@ -8,8 +8,8 @@ import org.haok.BraveSteveApp;
 import org.haok.GameType;
 import org.haok.component.BedComponent;
 
-public class ArrowBedCollision extends CollisionHandler {
-    public ArrowBedCollision() {
+public class ArrowBedCollisionHandler extends CollisionHandler {
+    public ArrowBedCollisionHandler() {
         super(GameType.ARROW, GameType.BED);
     }
 

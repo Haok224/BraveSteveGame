@@ -17,8 +17,8 @@ import org.haok.effects.ShipEffect;
 
 import java.util.List;
 
-public class ItemPlayerCollision extends CollisionHandler {
-    public ItemPlayerCollision() {
+public class ItemPlayerCollisionHandler extends CollisionHandler {
+    public ItemPlayerCollisionHandler() {
         super(GameType.ITEM, GameType.PLAYER);
     }
 
@@ -46,8 +46,7 @@ public class ItemPlayerCollision extends CollisionHandler {
             case TNT -> {
                 FXGL.play("bomb.wav");
                 List<Entity> entityList = FXGL.getGameWorld().getEntitiesByType(GameType.ENEMY);
-                for (int i = 0; i < entityList.size(); i++) {
-                    Entity e = entityList.get(i);
+                for (Entity e : entityList) {
                     FXGL.spawn("explode", e.getCenter().subtract(Config.CELL_SIZE / 2.0, Config.CELL_SIZE / 2.0));
                     e.removeFromWorld();
                     FXGL.inc("destroyedEnemyAmount", 1);

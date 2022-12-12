@@ -89,7 +89,7 @@ public class PlayerComponent extends Component {
         move();
     }
 
-    //组件会被实体添加时调用
+    //在组件被实体添加时调用
     @Override
     public void onAdded() {
         shootTimer = FXGL.newLocalTimer();

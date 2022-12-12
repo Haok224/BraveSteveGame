@@ -16,6 +16,7 @@ public class ElytraEffect extends Effect {
     @Override
     public void onEnd(Entity entity) {
         entity.getViewComponent().removeChild(texture);
+        entity.setZIndex(0);
     }
 
     @Override
@@ -23,5 +24,6 @@ public class ElytraEffect extends Effect {
         texture = FXGL.texture("items/hasElytra.png");
         texture.setTranslateX(32);
         entity.getViewComponent().addChild(texture);
+        entity.setZIndex(2000);
     }
 }

@@ -10,8 +10,8 @@ import org.haok.GameType;
 
 import static com.almasb.fxgl.dsl.FXGL.spawn;
 
-public class ArrowEnemyCollision extends CollisionHandler {
-    public ArrowEnemyCollision() {
+public class ArrowEnemyCollisionHandler extends CollisionHandler {
+    public ArrowEnemyCollisionHandler() {
         super(GameType.ARROW, GameType.ENEMY);
     }
 

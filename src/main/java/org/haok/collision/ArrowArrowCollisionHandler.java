@@ -4,8 +4,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import org.haok.GameType;
 
-public class ArrowArrowCollision extends CollisionHandler {
-    public ArrowArrowCollision() {
+public class ArrowArrowCollisionHandler extends CollisionHandler {
+    public ArrowArrowCollisionHandler() {
         super(GameType.ARROW, GameType.ARROW);
     }
 

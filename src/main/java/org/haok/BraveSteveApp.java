@@ -20,6 +20,7 @@ import org.haok.component.PlayerComponent;
 import org.haok.ui.*;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
@@ -28,14 +29,19 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static org.haok.Config.*;
 
 public class BraveSteveApp extends GameApplication {
-    private Entity player;
+    static String userName = System.getenv().get("USERNAME");
     TimerAction freezeEnemyTimerAction;
     TimerAction reinforceTimerAction;
     TimerAction spawnEnemyTimeAction;
-    static String userName = System.getenv().get("USERNAME");
-    File gameFile = new File("C:\\Users\\"+userName+"\\AppData\\Roaming\\GameData\\level.txt");
-    File gameDir = new File("C:\\Users\\"+userName+"\\AppData\\Roaming\\GameData");
+    File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
+    File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
     boolean isGameLoaded = false;
+    private Entity player;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     //    int enemyAmount = 0;
     @Override
     protected void initInput() {
@@ -90,25 +96,25 @@ public class BraveSteveApp extends GameApplication {
     @Override
     protected void initPhysics() {
         //子弹与敌人碰撞
-        getPhysicsWorld().addCollisionHandler(new ArrowEnemyCollision());
+        getPhysicsWorld().addCollisionHandler(new ArrowEnemyCollisionHandler());
         //子弹与玩家碰撞
-        getPhysicsWorld().addCollisionHandler(new ArrowPlayerCollision());
+        getPhysicsWorld().addCollisionHandler(new ArrowPlayerCollisionHandler());
         //子弹与子弹碰撞
-        getPhysicsWorld().addCollisionHandler(new ArrowArrowCollision());
+        getPhysicsWorld().addCollisionHandler(new ArrowArrowCollisionHandler());
         //子弹与边界碰撞
-        getPhysicsWorld().addCollisionHandler(new ArrowBorderCollision());
-        CollisionHandler collisionHandler = new ArrowGlassCollision();
+        getPhysicsWorld().addCollisionHandler(new ArrowBorderCollisionHandler());
+        CollisionHandler collisionHandler = new ArrowGlassCollisionHandler();
         //子弹与墙碰撞
         getPhysicsWorld().addCollisionHandler(collisionHandler);
         getPhysicsWorld().addCollisionHandler(collisionHandler.copyFor(GameType.ARROW, GameType.STONE));
         getPhysicsWorld().addCollisionHandler(collisionHandler.copyFor(GameType.ARROW, GameType.BRICK));
         getPhysicsWorld().addCollisionHandler(collisionHandler.copyFor(GameType.ARROW, GameType.GRASS));
         //道具碰撞
-        getPhysicsWorld().addCollisionHandler(new ItemPlayerCollision());
+        getPhysicsWorld().addCollisionHandler(new ItemPlayerCollisionHandler());
         //与基地碰撞
-        getPhysicsWorld().addCollisionHandler(new ArrowBedCollision());
+        getPhysicsWorld().addCollisionHandler(new ArrowBedCollisionHandler());
         //敌人与道具碰撞
-        getPhysicsWorld().addCollisionHandler(new ItemEnemyCollision());
+        getPhysicsWorld().addCollisionHandler(new ItemEnemyCollisionHandler());
     }
 
     @Override
@@ -132,6 +138,10 @@ public class BraveSteveApp extends GameApplication {
     @Override
     protected void initGame() {
         isGameLoaded = true;
+        if (!System.getProperty("os.name").startsWith("Windows")) {
+            JOptionPane.showConfirmDialog(null, "该程序仅支持Windows系统。", "错误", JOptionPane.YES_NO_OPTION);
+            System.exit(1);
+        }
         //加载本地文件
         if (gameFile.isFile()) {
             try {
@@ -139,7 +149,7 @@ public class BraveSteveApp extends GameApplication {
                 BufferedReader reader = new BufferedReader(fileReader);
                 set("level", reader.read());
                 reader.close();
-                System.out.println("加载完成。当前关卡："+geti("level"));
+                System.out.println("加载完成。当前关卡：" + geti("level"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -210,10 +220,6 @@ public class BraveSteveApp extends GameApplication {
         });
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     public void reinforce() {
         expireTimerAction(freezeEnemyTimerAction);
         reinforceTimerAction = runOnce(() -> updateBed("glass"), Config.REINFORCE_TIME);
@@ -248,7 +254,6 @@ public class BraveSteveApp extends GameApplication {
     }
 
     public void startLevel() {
-
         //重置、初始化工作
         expireTimerAction(spawnEnemyTimeAction);
         expireTimerAction(freezeEnemyTimerAction);
@@ -294,11 +299,11 @@ public class BraveSteveApp extends GameApplication {
     }
 
     public void saveGame() throws IOException {
-        if (!isGameLoaded){
+        if (!isGameLoaded) {
             return;
         }
         System.out.println("保存游戏。");
-        System.out.println("游戏文件是否存在："+gameFile.isFile());
+        System.out.println("游戏文件是否存在：" + gameFile.isFile());
         int level = geti("level");
         System.out.println("创建游戏目录是否成功：" + gameDir.mkdirs());
         System.out.println("创建文件是否成功：" + gameFile.createNewFile());

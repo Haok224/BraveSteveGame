@@ -11,8 +11,8 @@ import org.haok.GameType;
 import org.haok.effects.ArmorEffect;
 import org.haok.effects.ElytraEffect;
 
-public class ArrowPlayerCollision extends CollisionHandler {
-    public ArrowPlayerCollision() {
+public class ArrowPlayerCollisionHandler extends CollisionHandler {
+    public ArrowPlayerCollisionHandler() {
         super(GameType.ARROW, GameType.PLAYER);
     }
 
