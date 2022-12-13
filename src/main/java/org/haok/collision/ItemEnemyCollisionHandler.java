@@ -107,7 +107,7 @@ public class ItemEnemyCollisionHandler extends CollisionHandler {
             case ENDER_PEARL -> {
                 FXGL.play("item.wav");
                 enemy.getComponent(EffectComponent.class).startEffect(new EnderPearlEffect());
-            }
+            }case DISPENSER -> enemy.getComponent(EffectComponent.class).startEffect(new DispenserEffect());
         }
     }
 }

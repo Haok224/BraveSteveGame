@@ -5,6 +5,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import org.haok.Dir;
+import org.haok.GameType;
 
 public class DispenserComponent extends Component {
     Dir dir;
@@ -18,8 +19,8 @@ public class DispenserComponent extends Component {
         if (FXGLMath.randomBoolean(0.5)){
             FXGL.spawn("arrow", new SpawnData(entity.getCenter().subtract(16 / 2.0, 6 / 2.0))
                     .put("dir", dir.getVector())
-                    .put("type", entity.getType())
-                    .put("level", entity.getComponent(PlayerLevelComponent.class).getValue())
+                    .put("type", GameType.PLAYER)
+                    .put("level", 0)
             );
         }
     }

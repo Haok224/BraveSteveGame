@@ -6,6 +6,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.*;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.EffectComponent;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
@@ -17,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import org.haok.collision.*;
 import org.haok.component.PlayerComponent;
+import org.haok.effects.DispenserEffect;
 import org.haok.ui.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -86,6 +88,10 @@ public class BraveSteveApp extends GameApplication {
             }
             PlayerComponent component = player.getComponent(PlayerComponent.class);
             component.tp();
+            if (player.getComponent(EffectComponent.class).hasEffect(DispenserEffect.class)){
+                FXGL.spawn("dispenser",player.getX()+24,player.getY()+24);
+                player.getComponent(EffectComponent.class).endEffect(new DispenserEffect());
+            }
         });
     }
 
