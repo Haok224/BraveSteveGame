@@ -110,9 +110,7 @@ public class PlayerComponent extends Component {
                     .put("dir", moveDir.getVector())
                     .put("type", entity.getType())
                     .put("level", entity.getComponent(PlayerLevelComponent.class).getValue())
-            )
-
-            ;
+            );
         }
         shootTimer.capture();
     }

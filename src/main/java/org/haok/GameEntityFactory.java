@@ -15,10 +15,7 @@ import com.almasb.fxgl.ui.ProgressBar;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.haok.component.BedComponent;
-import org.haok.component.EnemyComponent;
-import org.haok.component.PlayerComponent;
-import org.haok.component.PlayerLevelComponent;
+import org.haok.component.*;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -224,6 +221,14 @@ public class GameEntityFactory implements EntityFactory {
                 .with(new BedComponent())
                 .with(healthIntComponent)
                 .collidable()
+                .build();
+    }
+
+    @Spawns("dispenser")
+    public Entity newDispenser(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .viewWithBBox("dispenser.png")
+                .with(new DispenserComponent(BraveSteveApp.player.getComponent(PlayerComponent.class).getMoveDir()))
                 .build();
     }
 }

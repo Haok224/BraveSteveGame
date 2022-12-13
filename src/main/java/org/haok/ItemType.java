@@ -11,5 +11,6 @@ public enum ItemType {
     TIME_WATCH,
     SHOVEL,
     ELYTRA,
-    ENDER_PEARL
+    ENDER_PEARL,
+    DISPENSER
 }

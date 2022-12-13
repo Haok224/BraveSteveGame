@@ -75,6 +75,8 @@ public class ItemPlayerCollisionHandler extends CollisionHandler {
             case ENDER_PEARL -> {
                 FXGL.play("item.wav");
                 player.getComponent(EffectComponent.class).startEffect(new EnderPearlEffect());
+            }case DISPENSER -> {
+
             }
         }
     }

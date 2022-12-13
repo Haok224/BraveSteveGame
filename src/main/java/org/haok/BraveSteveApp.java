@@ -36,7 +36,7 @@ public class BraveSteveApp extends GameApplication {
     File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
     File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
     boolean isGameLoaded = false;
-    private Entity player;
+    public static Entity player;
 
     public static void main(String[] args) {
         launch(args);
