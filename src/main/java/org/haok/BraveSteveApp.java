@@ -148,6 +148,7 @@ public class BraveSteveApp extends GameApplication {
             JOptionPane.showConfirmDialog(null, "该程序仅支持Windows系统。", "错误", JOptionPane.YES_NO_OPTION);
             System.exit(1);
         }
+        FXGL.loopBGM("music.wav");
         //加载本地文件
         if (gameFile.isFile()) {
             try {

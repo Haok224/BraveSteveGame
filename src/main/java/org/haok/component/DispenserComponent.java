@@ -9,6 +9,7 @@ import org.haok.GameType;
 
 public class DispenserComponent extends Component {
     Dir dir;
+    double time = 0;
     public DispenserComponent(Dir dir) {
         super();
         this.dir = dir;
@@ -23,5 +24,10 @@ public class DispenserComponent extends Component {
                     .put("level", 0)
             );
         }
+        if (time >= 5.0){
+            entity.removeFromWorld();
+            return;
+        }
+        time += tpf;
     }
 }
