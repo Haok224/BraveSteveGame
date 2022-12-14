@@ -5,7 +5,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import org.haok.Dir;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 
 public class DispenserComponent extends Component {
     Dir dir;

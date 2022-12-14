@@ -1,50 +1,27 @@
-package org.haok;
+package org.haok.factories;
 
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.dsl.components.EffectComponent;
-import com.almasb.fxgl.dsl.components.ExpireCleanComponent;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
-import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
-import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.ui.ProgressBar;
-import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.haok.component.*;
+import org.haok.BraveSteveApp;
+import org.haok.Config;
+import org.haok.enums.GameType;
+import org.haok.enums.ItemType;
+import org.haok.component.BedComponent;
+import org.haok.component.DispenserComponent;
+import org.haok.component.PlayerComponent;
 
 import java.util.Locale;
 import java.util.Objects;
 
-public class GameEntityFactory implements EntityFactory {
-    @Spawns("player")
-    public Entity newPlayer(SpawnData data) {
-        HealthIntComponent healthIntComponent = new HealthIntComponent(Config.MAX_HP);
-        healthIntComponent.setValue(Config.MAX_HP);
-        ProgressBar hpBar = new ProgressBar();
-        hpBar.maxValueProperty().bind(healthIntComponent.maxValueProperty());
-        hpBar.currentValueProperty().bind(healthIntComponent.valueProperty());
-        hpBar.setWidth(Config.CELL_SIZE);
-        hpBar.setTranslateY(32);
-        hpBar.setHeight(8);
-        hpBar.setFill(Color.LIGHTGREEN);
-        return FXGL.entityBuilder(data)
-                .with(new PlayerLevelComponent())
-                .type(GameType.PLAYER)
-                .viewWithBBox("steve.png") //碰撞箱大小
-                .view(hpBar)
-                .with(new EffectComponent())
-                .with(new PlayerComponent())
-                .with(new PlayerLevelComponent())
-                .with(healthIntComponent)
-                .with(new CollidableComponent(true))
-                .build();
-    }
-
+public class MapEntityFactory implements EntityFactory {
     @Spawns("glass")
     public Entity newGlass(SpawnData data) {
         return FXGL.entityBuilder(data)
@@ -116,82 +93,6 @@ public class GameEntityFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("arrow")
-    public Entity newArrow(SpawnData data) {
-        Point2D dir = data.get("dir");
-        CollidableComponent collidableComponent = new CollidableComponent(true);
-        collidableComponent.addIgnoredType(data.get("type"));
-        int level = data.<Integer>get("level");
-        Entity arrow = FXGL.entityBuilder(data)
-                .type(GameType.ARROW)
-                .viewWithBBox("arrow.png")
-                .with(new ProjectileComponent(dir, Config.ARROW_SPEED))
-                .with(collidableComponent)
-                .collidable()
-                .build();
-        Entity betterArrow = FXGL.entityBuilder(data)
-                .type(GameType.ARROW)
-                .viewWithBBox("betterArrow.png")
-                .with(new ProjectileComponent(dir, Config.ARROW_SPEED))
-                .with(collidableComponent)
-                .collidable()
-                .build();
-        Entity bestArrow = FXGL.entityBuilder(data)
-                .type(GameType.ARROW)
-                .viewWithBBox("bestArrow.png")
-                .with(new ProjectileComponent(dir, Config.ARROW_SPEED))
-                .with(collidableComponent)
-                .collidable()
-                .build();
-        switch (level) {
-            case 0 -> {
-                FXGL.play("biu.wav");
-                return arrow;
-            }
-            case 1 -> {
-                FXGL.play("biu.wav");
-                return betterArrow;
-            }
-            case 2 -> {
-                FXGL.play("launch.wav");
-                return bestArrow;
-            }
-        }
-        return arrow;
-    }
-
-    @Spawns("enemy")
-    public Entity newEnemy(SpawnData data) {
-        return FXGL.entityBuilder(data)
-                .type(GameType.ENEMY)
-                .viewWithBBox("zombie.png") //碰撞箱大小
-                .with(new EffectComponent())
-                .with(new PlayerComponent())
-                .with(new PlayerLevelComponent())
-                .with(new EnemyComponent())
-                .collidable()
-                .build();
-    }
-
-    @Spawns("explode")
-    public Entity newExplode(SpawnData data) {
-        FXGL.play("die.wav");
-        return FXGL.entityBuilder(data)
-                .view("die.png")
-                .with(new ExpireCleanComponent(Config.EXPLODE_TIME))//过期清理
-                .build();
-    }
-
-
-    @Spawns("die")
-    public Entity newDie(SpawnData data) {
-        FXGL.play("playerDie.wav");
-        return FXGL.entityBuilder(data)
-                .view("die.png")
-                .with(new ExpireCleanComponent(Config.EXPLODE_TIME))//过期清理
-                .build();
-    }
-
     @Spawns("item")
     public Entity newItem(SpawnData data) {
         ItemType itemType = FXGLMath.random(ItemType.values()).isPresent() ? FXGLMath.random(ItemType.values()).get() : null;
@@ -229,6 +130,8 @@ public class GameEntityFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .viewWithBBox("dispenser.png")
                 .with(new DispenserComponent(BraveSteveApp.player.getComponent(PlayerComponent.class).getMoveDir()))
+                .collidable()
+                .type(GameType.DISPENSER)
                 .build();
     }
 }

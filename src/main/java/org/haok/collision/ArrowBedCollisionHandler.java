@@ -5,7 +5,7 @@ import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import org.haok.BraveSteveApp;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 import org.haok.component.BedComponent;
 
 public class ArrowBedCollisionHandler extends CollisionHandler {

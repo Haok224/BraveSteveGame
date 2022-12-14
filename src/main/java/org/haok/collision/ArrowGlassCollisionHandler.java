@@ -4,7 +4,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import org.haok.Config;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.haok;
+package org.haok.enums;
 
 public enum ItemType {
     FIREWORK,

@@ -7,7 +7,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import org.haok.BraveSteveApp;
 import org.haok.Config;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 import org.haok.effects.ArmorEffect;
 import org.haok.effects.ElytraEffect;
 

@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.haok.Config;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 import org.haok.component.PlayerLevelComponent;
 
 public class InfoPane extends VBox {

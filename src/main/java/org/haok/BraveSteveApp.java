@@ -19,6 +19,10 @@ import javafx.util.Duration;
 import org.haok.collision.*;
 import org.haok.component.PlayerComponent;
 import org.haok.effects.DispenserEffect;
+import org.haok.enums.GameType;
+import org.haok.factories.BiologyEntityFactory;
+import org.haok.factories.MapEntityFactory;
+import org.haok.factories.SpecialEntityFactory;
 import org.haok.ui.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +35,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static org.haok.Config.*;
 
 public class BraveSteveApp extends GameApplication {
+    public static Entity player;
     static String userName = System.getenv().get("USERNAME");
     TimerAction freezeEnemyTimerAction;
     TimerAction reinforceTimerAction;
@@ -38,7 +43,6 @@ public class BraveSteveApp extends GameApplication {
     File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
     File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
     boolean isGameLoaded = false;
-    public static Entity player;
 
     public static void main(String[] args) {
         launch(args);
@@ -88,8 +92,13 @@ public class BraveSteveApp extends GameApplication {
             }
             PlayerComponent component = player.getComponent(PlayerComponent.class);
             component.tp();
-            if (player.getComponent(EffectComponent.class).hasEffect(DispenserEffect.class)){
-                FXGL.spawn("dispenser",player.getX()+24,player.getY()+24);
+            if (player.getComponent(EffectComponent.class).hasEffect(DispenserEffect.class)) {
+                switch (player.getComponent(PlayerComponent.class).getMoveDir()) {
+                    case UP -> FXGL.spawn("dispenser", player.getX(), player.getY() - 24);
+                    case DOWN -> FXGL.spawn("dispenser", player.getX(), player.getY() + 24);
+                    case LEFT -> FXGL.spawn("dispenser", player.getX() - 24, player.getY());
+                    case RIGHT -> FXGL.spawn("dispenser", player.getX() + 24, player.getY());
+                }
                 player.getComponent(EffectComponent.class).endEffect(new DispenserEffect());
             }
         });
@@ -166,8 +175,11 @@ public class BraveSteveApp extends GameApplication {
         //1.设置背景灰色
         getGameScene().setBackgroundColor(Color.GREY);
 
-        //2.创建玩家实体
-        getGameWorld().addEntityFactory(new GameEntityFactory());
+        //2.游戏初始设定
+        getGameWorld().addEntityFactory(new BiologyEntityFactory());
+        getGameWorld().addEntityFactory(new MapEntityFactory());
+        getGameWorld().addEntityFactory(new SpecialEntityFactory());
+
         startLevel();
         getip("destroyedEnemyAmount").addListener((ob, ov, nv) -> {
             if (nv.intValue() == MAX_ENEMY_AMOUNT) {
@@ -191,6 +203,7 @@ public class BraveSteveApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
+        //设置UI
         gameSettings.setMainMenuEnabled(true);
         gameSettings.setTitle("Brave Steve");
         gameSettings.setVersion("1.0");
@@ -269,7 +282,10 @@ public class BraveSteveApp extends GameApplication {
         set("enemyAmount", 0);
         set("destroyedEnemyAmount", 0);
         setLevelFromMap("level" + geti("level") + ".tmx");
+        //创建玩家实体
         player = spawn("player", PLAYER_POINT);
+
+        //创建信息菜单
         GameView view = new GameView(new InfoPane(), Integer.MAX_VALUE);
         getGameScene().addGameView(view);
 

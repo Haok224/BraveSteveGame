@@ -13,7 +13,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import org.haok.Config;
 import org.haok.Dir;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 import org.haok.effects.ElytraEffect;
 import org.haok.effects.EnderPearlEffect;
 import org.haok.effects.FreezeEffect;
@@ -36,7 +36,8 @@ public class PlayerComponent extends Component {
                     GameType.WATER,
                     GameType.ENEMY,
                     GameType.PLAYER,
-                    GameType.BRICK
+                    GameType.BRICK,
+                    GameType.DISPENSER
             ));
     private final LazyValue<EntityGroup> blockLazyValue = new LazyValue<>(() ->
             FXGL.getGameWorld().getGroup(
@@ -45,7 +46,8 @@ public class PlayerComponent extends Component {
                     GameType.GLASS,
                     GameType.ENEMY,
                     GameType.PLAYER,
-                    GameType.BRICK
+                    GameType.BRICK,
+                    GameType.DISPENSER
             ));
     private final LazyValue<EntityGroup> borderValue = new LazyValue<>(() ->
             FXGL.getGameWorld().getGroup(

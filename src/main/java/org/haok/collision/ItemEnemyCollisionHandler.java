@@ -7,8 +7,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
 import org.haok.BraveSteveApp;
 import org.haok.Config;
-import org.haok.GameType;
-import org.haok.ItemType;
+import org.haok.enums.GameType;
+import org.haok.enums.ItemType;
 import org.haok.component.PlayerLevelComponent;
 import org.haok.effects.*;
 

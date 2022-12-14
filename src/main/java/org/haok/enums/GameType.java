@@ -1,4 +1,4 @@
-package org.haok;
+package org.haok.enums;
 
 public enum GameType {
     PLAYER,
@@ -12,5 +12,6 @@ public enum GameType {
     ENEMY,
     BRICK,
     BED,
-    ITEM
+    ITEM,
+    DISPENSER
 }

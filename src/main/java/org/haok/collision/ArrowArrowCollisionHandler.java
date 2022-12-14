@@ -2,7 +2,7 @@ package org.haok.collision;
 
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
-import org.haok.GameType;
+import org.haok.enums.GameType;
 
 public class ArrowArrowCollisionHandler extends CollisionHandler {
     public ArrowArrowCollisionHandler() {
