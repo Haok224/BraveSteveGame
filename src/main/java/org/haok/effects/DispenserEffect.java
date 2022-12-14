@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class DispenserEffect extends Effect {
     Texture texture = FXGL.texture("items/hasDispenser.png");
     public DispenserEffect() {
-        super(Duration.UNKNOWN);
+        super(Duration.INDEFINITE);
     }
 
     @Override

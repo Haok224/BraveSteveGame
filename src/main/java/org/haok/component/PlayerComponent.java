@@ -15,7 +15,7 @@ import org.haok.Config;
 import org.haok.Dir;
 import org.haok.enums.GameType;
 import org.haok.effects.ElytraEffect;
-import org.haok.effects.EnderPearlEffect;
+import org.haok.effects.ChorusFruitEffect;
 import org.haok.effects.FreezeEffect;
 import org.haok.effects.ShipEffect;
 
@@ -152,14 +152,14 @@ public class PlayerComponent extends Component {
     }
 
     public void tp() {
-        if (entity.getComponent(EffectComponent.class).hasEffect(EnderPearlEffect.class)) {
+        if (entity.getComponent(EffectComponent.class).hasEffect(ChorusFruitEffect.class)) {
             FXGL.play("tp.wav");
             Point2D point = FXGLMath.randomPoint(new Rectangle2D(Config.CELL_SIZE, Config.CELL_SIZE
                     , 26 * Config.CELL_SIZE - 24,
                     26 * Config.CELL_SIZE - 24));
             entity.setX(point.getX());
             entity.setY(point.getY());
-            entity.getComponent(EffectComponent.class).endEffect(EnderPearlEffect.class);
+            entity.getComponent(EffectComponent.class).endEffect(ChorusFruitEffect.class);
         }
     }
 }

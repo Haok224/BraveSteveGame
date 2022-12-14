@@ -5,7 +5,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.EffectComponent;
 import com.almasb.fxgl.entity.component.Component;
 import org.haok.Dir;
-import org.haok.effects.EnderPearlEffect;
+import org.haok.effects.ChorusFruitEffect;
 
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ public class EnemyComponent extends Component {
         if (FXGLMath.randomBoolean(0.03)) {
             playerComponent.shoot();
         }
-        if(getEntity().getComponent(EffectComponent.class).hasEffect(EnderPearlEffect.class)){
+        if(getEntity().getComponent(EffectComponent.class).hasEffect(ChorusFruitEffect.class)){
             if(FXGLMath.randomBoolean(0.3)){
                 playerComponent.tp();
             }

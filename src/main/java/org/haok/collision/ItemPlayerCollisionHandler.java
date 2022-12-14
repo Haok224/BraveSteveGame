@@ -69,9 +69,9 @@ public class ItemPlayerCollisionHandler extends CollisionHandler {
                 FXGL.play("elytra.wav");
                 player.getComponent(EffectComponent.class).startEffect(new ElytraEffect());
             }
-            case ENDER_PEARL -> {
+            case CHORUS_FRUIT -> {
                 FXGL.play("item.wav");
-                player.getComponent(EffectComponent.class).startEffect(new EnderPearlEffect());
+                player.getComponent(EffectComponent.class).startEffect(new ChorusFruitEffect());
             }
             case DISPENSER -> player.getComponent(EffectComponent.class).startEffect(new DispenserEffect());
         }
