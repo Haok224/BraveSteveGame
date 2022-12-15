@@ -9,8 +9,8 @@ import javafx.util.Duration;
 import org.haok.Config;
 
 public class FailedScene extends SubScene {
-    Texture texture = FXGL.texture("ui/gameOver.png");
-    TranslateTransition tt;
+    final Texture texture = FXGL.texture("ui/gameOver.png");
+    final TranslateTransition tt;
 
     public FailedScene() {
         texture.setLayoutX(28 * Config.CELL_SIZE / 2.0 - texture.getWidth() / 2.0);
@@ -19,9 +19,7 @@ public class FailedScene extends SubScene {
         tt.setFromY(0);
         tt.setToY(-(FXGL.getAppHeight() - 260));
         tt.setInterpolator(Interpolators.ELASTIC.EASE_OUT());
-        tt.setOnFinished(actionEvent -> {
-            FXGL.getGameController().gotoMainMenu();
-        });
+        tt.setOnFinished(actionEvent -> FXGL.getGameController().gotoMainMenu());
         getContentRoot().getChildren().add(texture);
     }
 

@@ -11,9 +11,9 @@ import org.haok.BraveSteveApp;
 import org.haok.Config;
 
 public class WinScene extends SubScene {
-    Texture texture = FXGL.texture("ui/gameWin.png");
-    TranslateTransition tt;
-    PauseTransition pt;
+    final Texture texture = FXGL.texture("ui/gameWin.png");
+    final TranslateTransition tt;
+    final PauseTransition pt;
 
     public WinScene(boolean needNextLevel) {
         texture.setLayoutX(28 * Config.CELL_SIZE / 2.0 - texture.getWidth() / 2.0);
@@ -30,9 +30,7 @@ public class WinScene extends SubScene {
                 FXGL.<BraveSteveApp>getAppCast().startLevel();
             }
         });
-        tt.setOnFinished(actionEvent -> {
-            FXGL.getSceneService().popSubScene();
-        });
+        tt.setOnFinished(actionEvent -> FXGL.getSceneService().popSubScene());
     }
 
     public void onCreate() {

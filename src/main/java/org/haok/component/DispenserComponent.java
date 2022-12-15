@@ -8,7 +8,7 @@ import org.haok.Dir;
 import org.haok.enums.GameType;
 
 public class DispenserComponent extends Component {
-    Dir dir;
+    final Dir dir;
     double time = 0;
     public DispenserComponent(Dir dir) {
         super();

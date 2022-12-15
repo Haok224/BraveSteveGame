@@ -36,12 +36,12 @@ import static org.haok.Config.*;
 
 public class BraveSteveApp extends GameApplication {
     public static Entity player;
-    static String userName = System.getenv().get("USERNAME");
+    static final String userName = System.getenv().get("USERNAME");
     TimerAction freezeEnemyTimerAction;
     TimerAction reinforceTimerAction;
     TimerAction spawnEnemyTimeAction;
-    File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
-    File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
+    final File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
+    final File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
     boolean isGameLoaded = false;
 
     public static void main(String[] args) {
@@ -222,7 +222,7 @@ public class BraveSteveApp extends GameApplication {
             @NotNull
             @Override
             public LoadingScene newLoadingScene() {
-                return new AppLoadingScean();
+                return new AppLoadingScene();
             }
 
             @NotNull

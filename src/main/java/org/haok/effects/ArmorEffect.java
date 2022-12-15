@@ -8,7 +8,7 @@ import com.almasb.fxgl.texture.Texture;
 import javafx.util.Duration;
 
 public class ArmorEffect extends Effect {
-    private Texture texture;
+    private final Texture texture;
 
     @Override
     public void onEnd(Entity entity) {

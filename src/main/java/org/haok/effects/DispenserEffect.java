@@ -8,7 +8,7 @@ import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 
 public class DispenserEffect extends Effect {
-    Texture texture = FXGL.texture("items/hasDispenser.png");
+    final Texture texture = FXGL.texture("items/hasDispenser.png");
     public DispenserEffect() {
         super(Duration.INDEFINITE);
     }
