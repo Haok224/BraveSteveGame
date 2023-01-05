@@ -41,7 +41,7 @@
                     <launcher>steve</launcher>
                     <jlinkImageName>steve</jlinkImageName>
                     <jlinkZipName>steveZip</jlinkZipName>
-                    <mainClass>org.haok.BraveSteveApp</mainClass>
+                    <mainClass>com.haok.BraveSteveApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>
