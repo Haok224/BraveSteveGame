@@ -34,13 +34,13 @@ import java.util.Map;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class BraveSteveApp extends GameApplication {
-    public static Entity player;
     static final String userName = System.getenv().get("USERNAME");
+    public static Entity player;
+    final File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
+    final File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
     TimerAction freezeEnemyTimerAction;
     TimerAction reinforceTimerAction;
     TimerAction spawnEnemyTimeAction;
-    final File gameFile = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData\\level.txt");
-    final File gameDir = new File("C:\\Users\\" + userName + "\\AppData\\Roaming\\GameData");
     boolean isGameLoaded = false;
 
     public static void main(String[] args) {
@@ -86,20 +86,28 @@ public class BraveSteveApp extends GameApplication {
             component.shoot();
         });
         onKey(KeyCode.F, () -> {
+                    if (playerNotExists()) {
+                        return;
+                    }
+                    PlayerComponent component = player.getComponent(PlayerComponent.class);
+                    component.tp();
+                    if (player.getComponent(EffectComponent.class).hasEffect(DispenserEffect.class)) {
+                        switch (player.getComponent(PlayerComponent.class).getMoveDir()) {
+                            case UP -> FXGL.spawn("dispenser", player.getX(), player.getY() - 24);
+                            case DOWN -> FXGL.spawn("dispenser", player.getX(), player.getY() + 24);
+                            case LEFT -> FXGL.spawn("dispenser", player.getX() - 24, player.getY());
+                            case RIGHT -> FXGL.spawn("dispenser", player.getX() + 24, player.getY());
+                        }
+                        player.getComponent(EffectComponent.class).endEffect(new DispenserEffect());
+                    }
+                }
+        );
+        onKey(KeyCode.M, () -> {
             if (playerNotExists()) {
                 return;
             }
             PlayerComponent component = player.getComponent(PlayerComponent.class);
-            component.tp();
-            if (player.getComponent(EffectComponent.class).hasEffect(DispenserEffect.class)) {
-                switch (player.getComponent(PlayerComponent.class).getMoveDir()) {
-                    case UP -> FXGL.spawn("dispenser", player.getX(), player.getY() - 24);
-                    case DOWN -> FXGL.spawn("dispenser", player.getX(), player.getY() + 24);
-                    case LEFT -> FXGL.spawn("dispenser", player.getX() - 24, player.getY());
-                    case RIGHT -> FXGL.spawn("dispenser", player.getX() + 24, player.getY());
-                }
-                player.getComponent(EffectComponent.class).endEffect(new DispenserEffect());
-            }
+            component.travel();
         });
     }
 

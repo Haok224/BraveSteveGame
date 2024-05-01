@@ -11,10 +11,9 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class AppMainMenu extends FXGLMenu {
+
     public AppMainMenu() {
         super(MenuType.MAIN_MENU);
-
-
         Texture texture = FXGL.texture("ui/mainmenu.png");
         Button btnStart = new Button("开始游戏");
         Button btnExit = new Button("退出游戏");

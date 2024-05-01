@@ -1,5 +1,6 @@
 package com.haok.component;
 
+import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
@@ -8,52 +9,29 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityGroup;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
+import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.time.LocalTimer;
-import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
 import com.haok.Config;
 import com.haok.Dir;
+import com.haok.effects.*;
 import com.haok.enums.GameType;
-import com.haok.effects.ElytraEffect;
-import com.haok.effects.ChorusFruitEffect;
-import com.haok.effects.FreezeEffect;
-import com.haok.effects.ShipEffect;
+import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.input.MouseButton;
 
 import java.util.List;
 
 public class PlayerComponent extends Component {
+    private final LazyValue<EntityGroup> blockAllLazyValue = new LazyValue<>(() -> FXGL.getGameWorld().getGroup(GameType.BORDER, GameType.STONE, GameType.GLASS, GameType.WATER, GameType.ENEMY, GameType.PLAYER, GameType.BRICK, GameType.DISPENSER));
+    private final LazyValue<EntityGroup> blockLazyValue = new LazyValue<>(() -> FXGL.getGameWorld().getGroup(GameType.BORDER, GameType.STONE, GameType.GLASS, GameType.ENEMY, GameType.PLAYER, GameType.BRICK, GameType.DISPENSER));
+    private final LazyValue<EntityGroup> borderValue = new LazyValue<>(() -> FXGL.getGameWorld().getGroup(GameType.BORDER));
+    Point2D pt;
     private boolean moveNow = false;
     private double distance;
     private Dir moveDir = Dir.UP;
     private LocalTimer shootTimer;
     @SuppressWarnings("all")
     private EffectComponent effectComponent;
-    private final LazyValue<EntityGroup> blockAllLazyValue = new LazyValue<>(() ->
-            FXGL.getGameWorld().getGroup(
-                    GameType.BORDER,
-                    GameType.STONE,
-                    GameType.GLASS,
-                    GameType.WATER,
-                    GameType.ENEMY,
-                    GameType.PLAYER,
-                    GameType.BRICK,
-                    GameType.DISPENSER
-            ));
-    private final LazyValue<EntityGroup> blockLazyValue = new LazyValue<>(() ->
-            FXGL.getGameWorld().getGroup(
-                    GameType.BORDER,
-                    GameType.STONE,
-                    GameType.GLASS,
-                    GameType.ENEMY,
-                    GameType.PLAYER,
-                    GameType.BRICK,
-                    GameType.DISPENSER
-            ));
-    private final LazyValue<EntityGroup> borderValue = new LazyValue<>(() ->
-            FXGL.getGameWorld().getGroup(
-                    GameType.BORDER
-            )
-    );
 
     @Override
     public void onUpdate(double tpf) {
@@ -95,6 +73,7 @@ public class PlayerComponent extends Component {
     @Override
     public void onAdded() {
         shootTimer = FXGL.newLocalTimer();
+
     }
 
     public void moveRight() {
@@ -108,11 +87,7 @@ public class PlayerComponent extends Component {
 
     public void shoot() {
         if (shootTimer.elapsed(Config.SHOOT_DELAY)) {
-            FXGL.spawn("arrow", new SpawnData(entity.getCenter().subtract(16 / 2.0, 6 / 2.0))
-                    .put("dir", moveDir.getVector())
-                    .put("type", entity.getType())
-                    .put("level", entity.getComponent(PlayerLevelComponent.class).getValue())
-            );
+            FXGL.spawn("arrow", new SpawnData(entity.getCenter().subtract(16 / 2.0, 6 / 2.0)).put("dir", moveDir.getVector()).put("type", entity.getType()).put("level", entity.getComponent(PlayerLevelComponent.class).getValue()));
         }
         shootTimer.capture();
     }
@@ -154,12 +129,23 @@ public class PlayerComponent extends Component {
     public void tp() {
         if (entity.getComponent(EffectComponent.class).hasEffect(ChorusFruitEffect.class)) {
             FXGL.play("tp.wav");
-            Point2D point = FXGLMath.randomPoint(new Rectangle2D(Config.CELL_SIZE, Config.CELL_SIZE
-                    , 26 * Config.CELL_SIZE - 24,
-                    26 * Config.CELL_SIZE - 24));
+            Point2D point = FXGLMath.randomPoint(new Rectangle2D(Config.CELL_SIZE, Config.CELL_SIZE, 26 * Config.CELL_SIZE - 24, 26 * Config.CELL_SIZE - 24));
             entity.setX(point.getX());
             entity.setY(point.getY());
             entity.getComponent(EffectComponent.class).endEffect(ChorusFruitEffect.class);
+        }
+    }
+
+    // 珍珠传送
+    public void travel() {
+        if (entity.getComponent(EffectComponent.class).hasEffect(PearlEffect.class)) {
+            GameScene sc = FXGL.getGameScene();
+            FXGL.play("tp.wav");
+            pt = FXGL.getInput().getMousePositionUI();
+            entity.setX(pt.getX());
+            entity.setY(pt.getY());
+            System.err.println("TRAVEL!!!");
+            entity.getComponent(EffectComponent.class).endEffect(PearlEffect.class);
         }
     }
 }

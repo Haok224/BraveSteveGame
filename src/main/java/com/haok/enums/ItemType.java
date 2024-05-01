@@ -12,5 +12,6 @@ public enum ItemType {
     SHOVEL,
     ELYTRA,
     CHORUS_FRUIT,
-    DISPENSER
+    DISPENSER,
+    ENDER_PEARL
 }
