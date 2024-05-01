@@ -1,6 +1,5 @@
 package com.haok.component;
 
-import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
@@ -9,7 +8,6 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityGroup;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.time.LocalTimer;
 import com.haok.Config;
 import com.haok.Dir;
@@ -17,7 +15,6 @@ import com.haok.effects.*;
 import com.haok.enums.GameType;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.input.MouseButton;
 
 import java.util.List;
 
@@ -139,7 +136,6 @@ public class PlayerComponent extends Component {
     // 珍珠传送
     public void travel() {
         if (entity.getComponent(EffectComponent.class).hasEffect(PearlEffect.class)) {
-            GameScene sc = FXGL.getGameScene();
             FXGL.play("tp.wav");
             pt = FXGL.getInput().getMousePositionUI();
             entity.setX(pt.getX());
