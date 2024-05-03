@@ -4,6 +4,7 @@ import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.texture.Texture;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -21,5 +22,11 @@ public class AppGameMenu extends FXGLMenu {
         btn.setOnAction(actionEvent -> FXGL.getGameController().gotoPlay());
         exit.setOnAction(actionEvent -> FXGL.getGameController().gotoMainMenu());
         getContentRoot().getChildren().addAll(texture, box);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        FXGL.getGameScene().setCursor(FXGL.image("ui/cursor.png"), new Point2D(0, 0));
     }
 }

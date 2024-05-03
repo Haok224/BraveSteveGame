@@ -137,6 +137,10 @@ public class BraveSteveApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new ArrowBedCollisionHandler());
         //敌人与道具碰撞
         getPhysicsWorld().addCollisionHandler(new ItemEnemyCollisionHandler());
+        //窒息设定
+        for (CollisionHandler ch : PlayerBlockCollisionHandler.getHandler()) {
+            getPhysicsWorld().addCollisionHandler(ch);
+        }
     }
 
     @Override
