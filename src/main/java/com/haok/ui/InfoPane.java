@@ -30,7 +30,7 @@ public class InfoPane extends VBox {
         tp.setVgap(6);
         tp.setPrefHeight(24 * 10 + 15 * 10);
         Texture flagTexture = FXGL.texture("level.png");
-        Text levelText = new Text("" + FXGL.geti("level"));
+        Text levelText = new Text(String.valueOf(FXGL.geti("level")));
         levelText.setFont(Font.font(26));
         HBox levelBox = new HBox(flagTexture, levelText);
         levelBox.setAlignment(Pos.BOTTOM_CENTER);
