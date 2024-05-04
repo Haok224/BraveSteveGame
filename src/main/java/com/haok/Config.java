@@ -36,5 +36,5 @@ public interface Config {
     int MAX_LEVEL_AMOUNT = 3;
     Duration PLAYER_FREEZY_TIME = Duration.seconds(5);
     Duration ELYTRA_TIME = Duration.seconds(10);
-    Point2D PLAYER_POINT = new Point2D(408.00,624.00);
+    Point2D PLAYER_POINT = new Point2D(408.00,600.00);
 }

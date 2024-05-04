@@ -85,7 +85,7 @@ public class BraveSteveApp extends GameApplication {
             PlayerComponent component = player.getComponent(PlayerComponent.class);
             component.shoot();
         });
-        onKey(KeyCode.F, () -> {
+        onKey(KeyCode.Q, () -> {
                     if (playerNotExists()) {
                         return;
                     }
@@ -102,7 +102,7 @@ public class BraveSteveApp extends GameApplication {
                     }
                 }
         );
-        onKey(KeyCode.M, () -> {
+        onKey(KeyCode.E, () -> {
             if (playerNotExists()) {
                 return;
             }

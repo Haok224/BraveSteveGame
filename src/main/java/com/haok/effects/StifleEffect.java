@@ -2,6 +2,7 @@ package com.haok.effects;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.Effect;
+import com.almasb.fxgl.dsl.components.EffectComponent;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.time.TimerAction;
@@ -26,14 +27,16 @@ public class StifleEffect extends Effect {
     @Override
     public void onStart(@NotNull Entity entity) {
         ac = FXGL.getGameTimer().runAtInterval(() -> {
-            entity.getComponent(HealthIntComponent.class).damage(1);
-            if (entity.getComponent(HealthIntComponent.class).isZero()) {
-                FXGL.spawn("die", entity.getCenter().subtract(Config.CELL_SIZE / 2.0, Config.CELL_SIZE / 2.0));
-                entity.removeFromWorld();
-                FXGL.getGameScene().setCursor(FXGL.image("ui/cursor.png"), new Point2D(0, 0));
-                FXGL.<BraveSteveApp>getAppCast().failed();
+            if (!entity.getComponent(EffectComponent.class).hasEffect(ElytraEffect.class) && !entity.getComponent(EffectComponent.class).hasEffect(ShipEffect.class)) {
+                entity.getComponent(HealthIntComponent.class).damage(1);
+                if (entity.getComponent(HealthIntComponent.class).isZero()) {
+                    FXGL.spawn("die", entity.getCenter().subtract(Config.CELL_SIZE / 2.0, Config.CELL_SIZE / 2.0));
+                    entity.removeFromWorld();
+                    FXGL.getGameScene().setCursor(FXGL.image("ui/cursor.png"), new Point2D(0, 0));
+                    FXGL.<BraveSteveApp>getAppCast().failed();
+                }
+                FXGL.play("hit.wav");
             }
-            FXGL.play("hit.wav");
         }, Duration.seconds(1));
     }
 }
